@@ -1,0 +1,2 @@
+const education = {}
+export { education };

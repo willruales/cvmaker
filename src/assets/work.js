@@ -1,0 +1,2 @@
+const work = {}
+export { work };
