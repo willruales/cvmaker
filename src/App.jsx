@@ -103,7 +103,7 @@ function CVTemplate() {
             onChange={(e) => setRole(e.target.value)}
           />
         </div>
-        <button type="submit">Add Work Experience</button>
+        <button type="submit">mini</button>
       </form>
 
       <FinalOne name={name} dob={dob} email={email} job={job} date={date} role={role} />
