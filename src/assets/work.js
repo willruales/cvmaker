@@ -1,2 +1,0 @@
-const work = {}
-export { work };

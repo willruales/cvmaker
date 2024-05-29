@@ -1,3 +1,0 @@
-const formData = [];
-
-export { formData }

@@ -1,2 +1,0 @@
-const education = {}
-export { education };

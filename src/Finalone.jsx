@@ -24,8 +24,8 @@ function FinalOne({ name, dob, email, jobRoles, educationDetails }) {
         <h3>Education</h3>
         {educationDetails.map((education, index) => (
           <div key={index}>
-            <p><strong>Institution:</strong> {education.institution}</p>
-            <p><strong>Degree:</strong> {education.degree}</p>
+            <p><strong>School:</strong> {education.institution}</p>
+            <p><strong>Qualification/Grade:</strong> {education.degree}</p>
             <p><strong>Start Date:</strong> {education.startDate}</p>
             <p><strong>End Date:</strong> {education.endDate}</p>
           </div>

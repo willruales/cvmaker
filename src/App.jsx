@@ -11,6 +11,8 @@ function CVTemplate() {
   const [jobRoles, setJobRoles] = useState([{ job: '', date: '', role: '' }]);
   const [educationDetails, setEducationDetails] = useState([{ institution: '', degree: '', startDate: '', endDate: '' }]);
   const [isParentFormMinimized, setIsParentFormMinimized] = useState(false);
+  const [isJobFormMinimized, setIsJobFormMinimized] = useState(false);
+  const [isEducationFormMinimized, setIsEducationFormMinimized] = useState(false);
 
   const handleJobChange = (index, event) => {
     const values = [...jobRoles];
@@ -48,13 +50,22 @@ function CVTemplate() {
     setIsParentFormMinimized(!isParentFormMinimized);
   };
 
+  const toggleJobFormMinimize = () => {
+    setIsJobFormMinimized(!isJobFormMinimized);
+  };
+
+  const toggleEducationFormMinimize = () => {
+    setIsEducationFormMinimized(!isEducationFormMinimized);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
   };
 
   return (
-    <div>
+    <div className='mainbody
+    '>
       <form onSubmit={handleSubmit}>
         {!isParentFormMinimized && (
           <>
@@ -87,7 +98,6 @@ function CVTemplate() {
         <button type="button" onClick={toggleParentFormMinimize}>
           {isParentFormMinimized ? 'Expand' : 'Minimize'}
         </button>
-        <button type="submit">Submit</button>
       </form>
 
       <Jobform
@@ -95,16 +105,16 @@ function CVTemplate() {
         handleJobChange={handleJobChange}
         handleAddJob={handleAddJob}
         handleRemoveJob={handleRemoveJob}
-        isMinimized={isParentFormMinimized} // Ensure job form is not minimized
-        toggleMinimize={() => {}}
+        isMinimized={isJobFormMinimized}
+        toggleMinimize={toggleJobFormMinimize}
       />
       <EducationForm
         educationDetails={educationDetails}
         handleEducationChange={handleEducationChange}
         handleAddEducation={handleAddEducation}
         handleRemoveEducation={handleRemoveEducation}
-        isMinimized={isParentFormMinimized} // Ensure education form is not minimized
-        toggleMinimize={() => {}}
+        isMinimized={isEducationFormMinimized}
+        toggleMinimize={toggleEducationFormMinimize}
       />
       <FinalOne
         name={name}
