@@ -1,109 +1,118 @@
 import React, { useState } from 'react';
 import './index.css';
 import './App.css';
-
-function FinalOne({ name, dob, email, job, date, role }) {
-  return (
-    <div className="FinalCV">
-      <h2>CV</h2>
-      <div>
-        <h3>Personal Information</h3>
-        <p><strong>Name:</strong> {name}</p>
-        <p><strong>Date of Birth:</strong> {dob}</p>
-        <p><strong>Email:</strong> {email}</p>
-      </div>
-      <div>
-        <h3>Work Experience</h3>
-        <p><strong>Job:</strong> {job}</p>
-        <p><strong>Date:</strong> {date}</p>
-        <p><strong>Role:</strong> {role}</p>
-      </div>
-    </div>
-  );
-}
-
+import Jobform from './Jobform';
+import EducationForm from './EducationForm';
+import FinalOne from './Finalone';
 function CVTemplate() {
   const [name, setName] = useState('');
   const [dob, setDob] = useState('');
   const [email, setEmail] = useState('');
-  const [job, setJob] = useState('');
-  const [date, setDate] = useState('');
-  const [role, setRole] = useState('');
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [jobRoles, setJobRoles] = useState([{ job: '', date: '', role: '' }]);
+  const [educationDetails, setEducationDetails] = useState([{ institution: '', degree: '', startDate: '', endDate: '' }]);
+  const [isParentFormMinimized, setIsParentFormMinimized] = useState(false);
+
+  const handleJobChange = (index, event) => {
+    const values = [...jobRoles];
+    values[index][event.target.name] = event.target.value;
+    setJobRoles(values);
+  };
+
+  const handleAddJob = () => {
+    setJobRoles([...jobRoles, { job: '', date: '', role: '' }]);
+  };
+
+  const handleRemoveJob = (index) => {
+    const values = [...jobRoles];
+    values.splice(index, 1);
+    setJobRoles(values);
+  };
+
+  const handleEducationChange = (index, event) => {
+    const values = [...educationDetails];
+    values[index][event.target.name] = event.target.value;
+    setEducationDetails(values);
+  };
+
+  const handleAddEducation = () => {
+    setEducationDetails([...educationDetails, { institution: '', degree: '', startDate: '', endDate: '' }]);
+  };
+
+  const handleRemoveEducation = (index) => {
+    const values = [...educationDetails];
+    values.splice(index, 1);
+    setEducationDetails(values);
+  };
+
+  const toggleParentFormMinimize = () => {
+    setIsParentFormMinimized(!isParentFormMinimized);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
-
-  const toggleMinimize = () => {
-    setIsMinimized(!isMinimized);
+    // Handle form submission logic here
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Date of Birth:</label>
-          <input
-            type="text"
-            value={dob}
-            onChange={(e) => setDob(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-
-      <form onSubmit={handleSubmit}>
-        {!isMinimized && (
+        {!isParentFormMinimized && (
           <>
             <div>
-              <label>Job:</label>
+              <label>Name:</label>
               <input
                 type="text"
-                value={job}
-                onChange={(e) => setJob(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
             <div>
-              <label>Date:</label>
+              <label>Date of Birth:</label>
               <input
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
+                type="text"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Email:</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </>
         )}
-        <div>
-          <label>Role:</label>
-          <input
-            type="text"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-          />
-        </div>
-        <button type="button" onClick={toggleMinimize}>
-          {isMinimized ? 'Expand' : 'Minimize'}
+        <button type="button" onClick={toggleParentFormMinimize}>
+          {isParentFormMinimized ? 'Expand' : 'Minimize'}
         </button>
+        <button type="submit">Submit</button>
       </form>
 
-      <FinalOne name={name} dob={dob} email={email} job={job} date={date} role={role} />
+      <Jobform
+        jobRoles={jobRoles}
+        handleJobChange={handleJobChange}
+        handleAddJob={handleAddJob}
+        handleRemoveJob={handleRemoveJob}
+        isMinimized={isParentFormMinimized} // Ensure job form is not minimized
+        toggleMinimize={() => {}}
+      />
+      <EducationForm
+        educationDetails={educationDetails}
+        handleEducationChange={handleEducationChange}
+        handleAddEducation={handleAddEducation}
+        handleRemoveEducation={handleRemoveEducation}
+        isMinimized={isParentFormMinimized} // Ensure education form is not minimized
+        toggleMinimize={() => {}}
+      />
+      <FinalOne
+        name={name}
+        dob={dob}
+        email={email}
+        jobRoles={jobRoles}
+        educationDetails={educationDetails}
+      />
     </div>
   );
 }

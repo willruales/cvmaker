@@ -4,7 +4,12 @@
   padding: 2rem;
   text-align: center;
 }
-
+.mainbody {
+  /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
