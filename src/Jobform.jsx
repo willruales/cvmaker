@@ -2,42 +2,53 @@ import React from 'react';
 
 function Jobform({ jobRoles, handleJobChange, handleAddJob, handleRemoveJob, isMinimized, toggleMinimize }) {
   return (
-    <div>
+    <form>
+      {jobRoles.map((jobRole, index) => (
+        <div key={index}>
+          {!isMinimized && (
+            <>
+              <div>
+                <label>Job:</label>
+                <input
+                  type="text"
+                  name="job"
+                  value={jobRole.job}
+                  onChange={(event) => handleJobChange(index, event)}
+                />
+              </div>
+              <div>
+                <label>Date:</label>
+                <input
+                  type="date"
+                  name="date"
+                  value={jobRole.date}
+                  onChange={(event) => handleJobChange(index, event)}
+                />
+              </div>
+            </>
+          )}
+          <div>
+            <label>Role:</label>
+            <input
+              type="text"
+              name="role"
+              value={jobRole.role}
+              onChange={(event) => handleJobChange(index, event)}
+            />
+          </div>
+          <button type="button" onClick={() => handleRemoveJob(index)}>
+            Remove Job
+          </button>
+        </div>
+      ))}
+   
       <button type="button" onClick={toggleMinimize}>
-        {isMinimized ? 'Expand Job Form' : 'Minimize Job Form'}
+        {isMinimized ? 'Expand' : 'Minimize'}
       </button>
-      {!isMinimized && (
-        <>
-          {jobRoles.map((jobRole, index) => (
-            <div key={index}>
-              <label>Job:</label>
-              <input
-                type="text"
-                name="job"
-                value={jobRole.job}
-                onChange={(e) => handleJobChange(index, e)}
-              />
-              <label>Date:</label>
-              <input
-                type="date"
-                name="date"
-                value={jobRole.date}
-                onChange={(e) => handleJobChange(index, e)}
-              />
-              <label>Role:</label>
-              <input
-                type="text"
-                name="role"
-                value={jobRole.role}
-                onChange={(e) => handleJobChange(index, e)}
-              />
-              <button type="button" onClick={() => handleRemoveJob(index)}>Remove Job</button>
-            </div>
-          ))}
-          <button type="button" onClick={handleAddJob}>Add Job</button>
-        </>
-      )}
-    </div>
+      <button type="button" onClick={handleAddJob}>
+        Add Job
+      </button>
+    </form>
   );
 }
 
