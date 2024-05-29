@@ -11,14 +11,16 @@ Currently, two official plugins are available:
 
 Components paranthesis help scope between modules eg
 
-Component{{{{
-  const handleJobChange = (index, event) => {
+     Component{
+     const [jobRoles, setJobRoles] = useState([{ job: '', date: '', role: '' }]);
+
+     
+       const handleJobChange = (index, event) => {
     const values = [...jobRoles];
     values[index][event.target.name] = event.target.value;
     setJobRoles(values);
-  };
+     };
 
-  
       <Jobform
         jobRoles={jobRoles}
         handleJobChange={handleJobChange}
@@ -26,8 +28,9 @@ Component{{{{
         handleRemoveJob={handleRemoveJob}
         isMinimized={isJobFormMinimized}
         toggleMinimize={toggleJobFormMinimize}
-      />}}}}}
+      />
 
-JobForm(){ Will then use HandleJobChange(as seen on line 25)}
-
-      
+        function Jobform({ jobRoles, handleJobChange, handleAddJob, handleRemoveJob, isMinimized, toggleMinimize }) {
+           return (HandleJobChance())}
+  
+Jobform is a component. Its state is scoped through to its parent. 
